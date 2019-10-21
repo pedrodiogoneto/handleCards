@@ -6,17 +6,20 @@ import { connect } from 'react-redux';
 import AddIcon from '@material-ui/icons/Add';
 import Fab from '@material-ui/core/Fab';
 
-import { GET_POSTS } from '../redux/actions/actions'
+import { GET_POSTS, ADD_POST } from '../redux/actions/actions'
 
 
 const Homepage = (props) => {
-	const 
+	const [posts, setPosts] = useState([])
 
+	useEffect(() => { props.GET_POSTS() }, [])
 
-	return(
+	useEffect(() => { setPosts(props.posts) }, [props.posts])
+	console.log('POSTS', posts)
+	return (
 		<Wrapper>
 
-			<Fab color="secondary" aria-label="add">
+			<Fab color="secondary" aria-label="add" onClick={()=> props.ADD_POST({title: '1', description: '2', url: '...'})}>
 				<AddIcon />
 			</Fab>
 
@@ -25,7 +28,8 @@ const Homepage = (props) => {
 }
 
 const mapDispatchToProps = dispatch => ({
-	GET_POSTS: () => dispatch(GET_POSTS())
+	GET_POSTS: () => dispatch(GET_POSTS()),
+	ADD_POST: (data) => dispatch(ADD_POST(data))
 })
 
 const mapStateToProps = state => ({
@@ -39,4 +43,5 @@ const Wrapper = styled.div`
 	display: flex;
 	align-self: flex-end;
 	flex-direction: row-reverse;
+	background-color: rgba(229, 229, 229);
 `
