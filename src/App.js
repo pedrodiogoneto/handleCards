@@ -16,8 +16,9 @@ const App = () => (
 export default App;
 
 const HomepageWrapper = styled.div`
-	padding: 10%;
+	padding: 3%;
 	height: 100%;
 	min-height: 100vh;
+	background-color: rgba(229, 229, 229);
 `
 
