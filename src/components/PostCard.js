@@ -5,7 +5,8 @@ import { UPDATE_USER_ACTION_POST } from '../redux/actions/actions'
 
 const defaultImage = "https://resize-pdm.francedimanche.ladmedia.fr/r/1024,/img/2019-05/artichaux-2.jpg?ffb5cbaff3"
 
-function PostCard({ post: { title, description, image = defaultImage}, UPDATE_USER_ACTION_POST }) {
+function PostCard({ post: { title, description, image = defaultImage, id}, UPDATE_USER_ACTION_POST }) {
+    console.log('postCARD', title, description, image)
 	return (
 		<CardWrapper>
 			<Image src={image} alt={title}/>
@@ -14,19 +15,19 @@ function PostCard({ post: { title, description, image = defaultImage}, UPDATE_US
                 <Description>{description}</Description>
             </TextWrapper>
             <ButtonsWrapper>
-                <button onClick={() => UPDATE_USER_ACTION_POST('edit')}>edit</button>
-                <button onClick={() => UPDATE_USER_ACTION_POST('delete')}>delete</button>
+                <button onClick={() => UPDATE_USER_ACTION_POST('edit', id)}>edit</button>
+                <button onClick={() => UPDATE_USER_ACTION_POST('delete', id)}>delete</button>
             </ButtonsWrapper>
 		</CardWrapper>
 	)
 }
 
 const mapDispatchToProps = dispatch => ({
-    UPDATE_USER_ACTION_POST: (action) => dispatch(UPDATE_USER_ACTION_POST(action)),
+    UPDATE_USER_ACTION_POST: (action, id) => dispatch(UPDATE_USER_ACTION_POST(action, id)),
 })
 
 const mapStateToProps = state => ({
-    
+    posts: state.posts
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostCard)

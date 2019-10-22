@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { GET_POSTS, ADD_POST, UPDATE_USER_ACTION_POST } from '../redux/actions/actions'
+import { GET_POSTS, ADD_POST, UPDATE_USER_ACTION_POST, DELETE_POST, EDIT_POST } from '../redux/actions/actions'
 import PostModal from '../components/PostModal';
 import PostsGrid from '../components/PostsGrid';
 
@@ -19,24 +19,41 @@ const Homepage = (props) => {
 
 	useEffect(() => { setUserAction(props.userAction) }, [props.userAction])
 
-	useEffect(() => { 
-		setShowModal(true)
-		return (
-			setUserAction(''),
-			props.UPDATE_USER_ACTION_POST('')
-		)
+	useEffect(() => {
+		if(userAction === 'add' || userAction === 'edit') {
+			setShowModal(true)
+		} else if(userAction === 'delete' && props.selectedPost) {
+			props.DELETE_POST(props.selectedPost.id)
+		}
 	}, [userAction])
 
-	const handleShowModal = (value) => { setShowModal(value) }
+	const cleanUserAction = () => {
+		setUserAction('')
+		props.UPDATE_USER_ACTION_POST('', '')
+	}
+
+	const handleShowModal = (value) => { 
+		if(!value) {
+			cleanUserAction()
+		}
+		return setShowModal(value) 
+	}
+
+	const handleOnSubmit = (data) => {
+		if(userAction === 'edit') props.EDIT_POST(data, props.selectedPost.id)
+		else props.ADD_POST(data)
+	}
+
+	console.log('PROPS ON HOMEPAGE', props)
 
 	return (
 		<Wrapper>
-			<PostModal showModal={showModal} handleOnClose={() => handleShowModal(false)} handleOnSubmit={(data)=> props.ADD_POST(data)}/>
+			<PostModal showModal={showModal} handleOnClose={() => handleShowModal(false)} handleOnSubmit={(data)=> handleOnSubmit(data)} userAction={userAction} selectedPost={props.selectedPost}/>
 
 			<PostsGrid posts={posts}/>
 
 			<ButtonWrapper>
-				<Fab color="secondary" aria-label="add" onClick={() => props.UPDATE_USER_ACTION_POST('add')}>
+				<Fab color="secondary" aria-label="add" onClick={() => props.UPDATE_USER_ACTION_POST('add', '')}>
 					<AddIcon />
 				</Fab>
 			</ButtonWrapper>
@@ -48,14 +65,16 @@ const Homepage = (props) => {
 const mapDispatchToProps = dispatch => ({
 	GET_POSTS: () => dispatch(GET_POSTS()),
 	ADD_POST: (data) => dispatch(ADD_POST(data)),
-	UPDATE_USER_ACTION_POST: (action) => dispatch(UPDATE_USER_ACTION_POST(action)),
+	UPDATE_USER_ACTION_POST: (action, id) => dispatch(UPDATE_USER_ACTION_POST(action, id)),
+	DELETE_POST: (id) => dispatch(DELETE_POST(id)),
+	EDIT_POST: (data, id) => dispatch(EDIT_POST(data, id)),
 
 })
 
 const mapStateToProps = state => ({
 	posts: state.posts,
 	userAction: state.userAction,
-	
+	selectedPost: state.selectedPost
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Homepage)

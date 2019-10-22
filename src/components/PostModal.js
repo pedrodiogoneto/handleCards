@@ -4,12 +4,19 @@ import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
 import styled from 'styled-components'
 
-export default function PostModal({ showModal, handleOnClose, handleOnSubmit }) {
+export default function PostModal({ showModal, handleOnClose, handleOnSubmit, userAction, selectedPost }) {
 	const [title, setTitle] = useState('')
 	const [description, setDescription] = useState('')
 	const [image, setImage] = useState('')
 	const [errorMessage, setErrorMessage] = useState('')
-    
+	
+	useEffect(() => {
+		if(userAction === 'edit' && selectedPost) {
+			setTitle(selectedPost.title)
+			setDescription(selectedPost.description)
+			setImage(selectedPost.image)
+		}
+	}, [])
 
 	useEffect(() => {
 		return clearForm()

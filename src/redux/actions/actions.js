@@ -13,11 +13,31 @@ export const ADD_POST = (data) => {
 	}
 }
 
-export const UPDATE_USER_ACTION_POST = (data) => {
+export const UPDATE_USER_ACTION_POST = (userAction, id) => {
 	return {
 		type: 'UPDATE_USER_ACTION_POST',
 		payload: {
-			userAction: data
+			userAction,
+			id
+		}
+	}
+}
+
+export const DELETE_POST = (id) => {
+	return {
+		type: 'DELETE_POST',
+		payload: {
+			id
+		}
+	}
+}
+
+export const EDIT_POST = (data, id) => {
+	return {
+		type: 'EDIT_POST',
+		payload: {
+			id,
+			data
 		}
 	}
 }
