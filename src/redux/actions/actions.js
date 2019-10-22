@@ -12,3 +12,12 @@ export const ADD_POST = (data) => {
 		}
 	}
 }
+
+export const UPDATE_USER_ACTION_POST = (data) => {
+	return {
+		type: 'UPDATE_USER_ACTION_POST',
+		payload: {
+			userAction: data
+		}
+	}
+}
