@@ -2,21 +2,22 @@ import React from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux';
 import { UPDATE_USER_ACTION_POST } from '../redux/actions/actions'
+import Icon from '@material-ui/core/Icon';
 
 const defaultImage = "https://resize-pdm.francedimanche.ladmedia.fr/r/1024,/img/2019-05/artichaux-2.jpg?ffb5cbaff3"
 
 function PostCard({ post: { title, description, image = defaultImage, id}, UPDATE_USER_ACTION_POST }) {
 	return (
 		<CardWrapper>
+			<ButtonsWrapper>
+				<Button onClick={() => UPDATE_USER_ACTION_POST('edit', id)}><Icon>edit</Icon></Button>
+				<Button onClick={() => UPDATE_USER_ACTION_POST('delete', id)}><Icon>delete</Icon></Button>
+			</ButtonsWrapper>
 			<Image src={image} alt={title}/>
 			<TextWrapper>
 				<Title>{title}</Title>
 				<Description>{description}</Description>
 			</TextWrapper>
-			<ButtonsWrapper>
-				<button onClick={() => UPDATE_USER_ACTION_POST('edit', id)}>edit</button>
-				<button onClick={() => UPDATE_USER_ACTION_POST('delete', id)}>delete</button>
-			</ButtonsWrapper>
 		</CardWrapper>
 	)
 }
@@ -31,9 +32,16 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostCard)
 
+const Button = styled.button`
+    color: transparent;
+    background-color: transparent;
+    width: 75px;
+    border: 0px
+`
 
 const ButtonsWrapper = styled.div`
-    background-color: grey;   
+    background-color: transparent;
+    position: absolute;
 `
 
 const CardWrapper = styled.div`
@@ -45,15 +53,21 @@ const CardWrapper = styled.div`
     -webkit-box-shadow: 0px 5px 15px 0px rgba(0,0,0,0.75);
     -moz-box-shadow: 0px 5px 15px 0px rgba(0,0,0,0.75);
     box-shadow: 0px 5px 15px 0px rgba(0,0,0,0.75);
+
+    &:hover ${Button} {
+        color: black;
+    }
 `
 
 const Image = styled.img`
-    width: 100%
+    width: 100%;
+    z-index: 1;
+
 `
 
 const TextWrapper = styled.div`
     padding: 0px 5% 5%;
-    margin-top: -50px
+    margin-top: -90px
     width: 100%;
 `
 
@@ -73,4 +87,5 @@ const Title = styled.h5`
     overflow: hidden;
     max-width: 80%;
     color:white;
+    font-size: 20pt;
 `
