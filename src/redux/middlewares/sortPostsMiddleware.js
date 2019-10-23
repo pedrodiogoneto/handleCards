@@ -1,8 +1,6 @@
 const sortPostsMiddleware = (store) => (next) => (action) => {
 	if(action.type !== 'SORT_POSTS') return next(action)
     
-	console.log('action on sort middleware', action)
-
 	const sortedList = store.getState().posts.sort((a, b) => {
 		const sortCondition1 = action.payload.sortDirection === 'ascending' ? 1 : -1
 		const sortCondition2 = action.payload.sortDirection === 'ascending' ? -1 : 1
@@ -10,9 +8,7 @@ const sortPostsMiddleware = (store) => (next) => (action) => {
 		else return sortCondition2
 	})
 
-	console.log(sortedList)
-    action.posts = sortedList
-
+	action.posts = sortedList
 	next(action)
 }
 

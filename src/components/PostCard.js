@@ -42,6 +42,9 @@ const CardWrapper = styled.div`
     border-radius: 2px;
     margin: 20px;
     min-width: 250px;
+    -webkit-box-shadow: 0px 5px 15px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 5px 15px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 5px 15px 0px rgba(0,0,0,0.75);
 `
 
 const Image = styled.img`

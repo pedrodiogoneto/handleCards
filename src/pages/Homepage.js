@@ -9,7 +9,6 @@ import AddIcon from '@material-ui/icons/Add';
 import Fab from '@material-ui/core/Fab';
 import Icon from '@material-ui/core/Icon';
 
-
 const Homepage = (props) => {
 	const [posts, setPosts] = useState([])
 	const [showModal, setShowModal] = useState(false)
@@ -39,7 +38,7 @@ const Homepage = (props) => {
 		if(!value) {
 			cleanUserAction()
 		}
-		return setShowModal(value) 
+		return setShowModal(value)
 	}
 
 	const handleOnSubmit = (data) => {
@@ -70,7 +69,6 @@ const Homepage = (props) => {
 					<AddIcon />
 				</Fab>
 			</AddButtonWrapper>
-
 		</Wrapper>
 	)
 }
