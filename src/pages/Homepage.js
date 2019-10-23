@@ -57,7 +57,7 @@ const Homepage = (props) => {
 	return (
 		<Wrapper>
 			<div>
-				<button style={{ float: 'right' }} onClick={()=> handleSort()}>Sort<Icon style={{ transform: 'rotate(90deg)' }}>arrow_right</Icon></button>
+				<SortButton onClick={()=> handleSort()}>Sort<Icon style={{ transform: `rotate(${sortDirection === 'ascending' ? '-90deg' : '90deg'})`, fontSize: '20pt'}}>arrow_right</Icon></SortButton>
 			</div>
 			
 			<PostModal showModal={showModal} handleOnClose={() => handleShowModal(false)} handleOnSubmit={(data)=> handleOnSubmit(data)} userAction={userAction} selectedPost={props.selectedPost}/>
@@ -98,4 +98,12 @@ const AddButtonWrapper = styled.div`
 	display: flex;
 	align-self: flex-end;
 	flex-direction: row-reverse;
+`
+
+const SortButton = styled.button`
+	float: right;
+	font-size: 18pt;
+	border: 0px;
+	background-color: transparent;
+
 `
