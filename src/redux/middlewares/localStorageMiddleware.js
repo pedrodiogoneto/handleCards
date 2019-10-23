@@ -5,9 +5,10 @@ const localStorageMiddleware = (store) => (next) => (action) => {
 		if(JSON.parse(localStorage.getItem('posts'))) {
 			action.posts = JSON.parse(localStorage.getItem('posts'))
 		}
-    }
-    
-	localStorage.setItem('posts', JSON.stringify(action.posts));
+	}
+	
+    const posts = action.posts ? action.posts : store.getState().posts
+	localStorage.setItem('posts', JSON.stringify(posts));
 
 	next(action)
 }
