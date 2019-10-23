@@ -21,3 +21,7 @@
 ## Instructions:
 
 ### Run project: `npm start`
+
+## Application deployed at: 
+
+- https://5db07fda4715586ffdb84230--happy-liskov-fa6349.netlify.com/
