@@ -41,3 +41,12 @@ export const EDIT_POST = (data, id) => {
 		}
 	}
 }
+
+export const SORT_POSTS = (sortDirection) => {
+	return {
+		type: 'SORT_POSTS',
+		payload: {
+			sortDirection
+		}
+	}
+}

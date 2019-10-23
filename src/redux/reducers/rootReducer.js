@@ -42,6 +42,12 @@ export default function reduxReducer(state = initialState, action) {
 			posts: action.posts
 		};
 	}
+	case 'SORT_POSTS': {
+		return {
+			...state,
+			posts: action.posts
+		};
+	}
 
 	default: {
 		return state;       
