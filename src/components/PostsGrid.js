@@ -5,8 +5,8 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 const PostCard = React.lazy(() => import('./PostCard'))
 
 export default function PostsGrid({posts}) {
-    console.log('!!!!!!!!!', posts)
-	const renderPostCards = () => {
+
+    const renderPostCards = () => {
 		if(!posts) return
 
 		return posts.map(post => (

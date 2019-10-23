@@ -6,36 +6,34 @@ import { UPDATE_USER_ACTION_POST } from '../redux/actions/actions'
 const defaultImage = "https://resize-pdm.francedimanche.ladmedia.fr/r/1024,/img/2019-05/artichaux-2.jpg?ffb5cbaff3"
 
 function PostCard({ post: { title, description, image = defaultImage, id}, UPDATE_USER_ACTION_POST }) {
-    console.log('postCARD', title, description, image)
 	return (
 		<CardWrapper>
 			<Image src={image} alt={title}/>
 			<TextWrapper>
-                <Title>{title}</Title>
-                <Description>{description}</Description>
-            </TextWrapper>
-            <ButtonsWrapper>
-                <button onClick={() => UPDATE_USER_ACTION_POST('edit', id)}>edit</button>
-                <button onClick={() => UPDATE_USER_ACTION_POST('delete', id)}>delete</button>
-            </ButtonsWrapper>
+				<Title>{title}</Title>
+				<Description>{description}</Description>
+			</TextWrapper>
+			<ButtonsWrapper>
+				<button onClick={() => UPDATE_USER_ACTION_POST('edit', id)}>edit</button>
+				<button onClick={() => UPDATE_USER_ACTION_POST('delete', id)}>delete</button>
+			</ButtonsWrapper>
 		</CardWrapper>
 	)
 }
 
 const mapDispatchToProps = dispatch => ({
-    UPDATE_USER_ACTION_POST: (action, id) => dispatch(UPDATE_USER_ACTION_POST(action, id)),
+	UPDATE_USER_ACTION_POST: (action, id) => dispatch(UPDATE_USER_ACTION_POST(action, id)),
 })
 
 const mapStateToProps = state => ({
-    posts: state.posts
+	posts: state.posts
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostCard)
 
 
 const ButtonsWrapper = styled.div`
-    background-color: grey;
-    
+    background-color: grey;   
 `
 
 const CardWrapper = styled.div`
@@ -44,7 +42,6 @@ const CardWrapper = styled.div`
     border-radius: 2px;
     margin: 20px;
     min-width: 250px;
-
 `
 
 const Image = styled.img`
