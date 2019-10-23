@@ -52,7 +52,8 @@ const Image = styled.img`
 `
 
 const TextWrapper = styled.div`
-    padding: 5%;
+    padding: 0px 5% 5%;
+    margin-top: -50px
     width: 100%;
 `
 
@@ -71,4 +72,5 @@ const Title = styled.h5`
     display: block;
     overflow: hidden;
     max-width: 80%;
+    color:white;
 `
