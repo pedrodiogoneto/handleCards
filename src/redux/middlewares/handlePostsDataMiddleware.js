@@ -1,7 +1,7 @@
 import reduxMiddlewarePostsDataHelpper from '../../helpers/reduxMiddlewarePostsDataHelpper'
 
 const handlePostsDataMiddleware = (store) => (next) => (action) => {
-	if(action.type === 'GET_POSTS') return next(action)
+	if(action.type === 'GET_POSTS' || action.type === 'SORT_POSTS') return next(action)
     
 	const { addNewPost, getSelectedPost, deleteSelectedPost, editSelectedPost } = reduxMiddlewarePostsDataHelpper
 

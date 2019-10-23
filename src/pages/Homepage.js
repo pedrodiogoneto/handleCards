@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { GET_POSTS, ADD_POST, UPDATE_USER_ACTION_POST, DELETE_POST, EDIT_POST } from '../redux/actions/actions'
+import { GET_POSTS, ADD_POST, UPDATE_USER_ACTION_POST, DELETE_POST, EDIT_POST, SORT_POSTS } from '../redux/actions/actions'
 import PostModal from '../components/PostModal';
 import PostsGrid from '../components/PostsGrid';
 
 import styled from 'styled-components'
 import AddIcon from '@material-ui/icons/Add';
 import Fab from '@material-ui/core/Fab';
+import Icon from '@material-ui/core/Icon';
+
 
 const Homepage = (props) => {
 	const [posts, setPosts] = useState([])
 	const [showModal, setShowModal] = useState(false)
 	const [userAction, setUserAction] = useState('')
+	const [sortDirection, setSortDirection] = useState('descending')
 
 	useEffect(() => { props.GET_POSTS() }, [])
 
@@ -44,10 +47,20 @@ const Homepage = (props) => {
 		else props.ADD_POST(data)
 	}
 
+	const handleSort = () => {
+		const newDirection = sortDirection === 'descending' ? 'descending' : 'ascending'
+		props.SORT_POSTS(newDirection)
+		setSortDirection(newDirection)
+	}
+
 	console.log('PROPS ON HOMEPAGE', props)
 
 	return (
 		<Wrapper>
+			<div>
+			<button style={{ float: 'right' }} onClick={()=> handleSort()}>Sort<Icon style={{ transform: 'rotate(90deg)' }}>arrow_right</Icon></button>
+			</div>
+			
 			<PostModal showModal={showModal} handleOnClose={() => handleShowModal(false)} handleOnSubmit={(data)=> handleOnSubmit(data)} userAction={userAction} selectedPost={props.selectedPost}/>
 
 			<PostsGrid posts={posts}/>
@@ -68,7 +81,7 @@ const mapDispatchToProps = dispatch => ({
 	UPDATE_USER_ACTION_POST: (action, id) => dispatch(UPDATE_USER_ACTION_POST(action, id)),
 	DELETE_POST: (id) => dispatch(DELETE_POST(id)),
 	EDIT_POST: (data, id) => dispatch(EDIT_POST(data, id)),
-
+	SORT_POSTS: (sortDirection) => dispatch(SORT_POSTS(sortDirection)),
 })
 
 const mapStateToProps = state => ({
