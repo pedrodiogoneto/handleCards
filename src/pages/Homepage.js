@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+import styled from 'styled-components'
 import { GET_POSTS, ADD_POST, UPDATE_USER_ACTION_POST, DELETE_POST, EDIT_POST, SORT_POSTS } from '../redux/actions/actions'
+
 import PostModal from '../components/PostModal';
 import PostsGrid from '../components/PostsGrid';
 
-import styled from 'styled-components'
 import AddIcon from '@material-ui/icons/Add';
 import Fab from '@material-ui/core/Fab';
 import Icon from '@material-ui/core/Icon';
@@ -52,22 +53,27 @@ const Homepage = (props) => {
 		setSortDirection(newDirection)
 	}
 
-	console.log('PROPS ON HOMEPAGE', props)
-
 	return (
 		<Wrapper>
 			<div>
-				<SortButton onClick={()=> handleSort()}>Sort<Icon style={{ transform: `rotate(${sortDirection === 'ascending' ? '-90deg' : '90deg'})`, fontSize: '20pt'}}>arrow_right</Icon></SortButton>
+				<SortButton onClick={()=> handleSort()}>
+					Sort
+					<Icon style={{ transform: `rotate(${sortDirection === 'ascending' ? '-90deg' : '90deg'})`, fontSize: '20pt'}}>
+						arrow_right
+					</Icon>
+				</SortButton>
 			</div>
-			
-			<PostModal showModal={showModal} handleOnClose={() => handleShowModal(false)} handleOnSubmit={(data)=> handleOnSubmit(data)} userAction={userAction} selectedPost={props.selectedPost}/>
+			<PostModal 
+				showModal={showModal} 
+				handleOnClose={() => handleShowModal(false)} 
+				handleOnSubmit={(data)=> handleOnSubmit(data)} 
+				userAction={userAction} 
+				selectedPost={props.selectedPost}/>
 
 			<PostsGrid posts={posts}/>
 
 			<AddButtonWrapper>
-				<Fab color="secondary" aria-label="add" onClick={() => props.UPDATE_USER_ACTION_POST('add', '')}>
-					<AddIcon />
-				</Fab>
+				<Fab color="secondary" aria-label="add" onClick={() => props.UPDATE_USER_ACTION_POST('add', '')}><AddIcon /></Fab>
 			</AddButtonWrapper>
 		</Wrapper>
 	)
