@@ -14,6 +14,7 @@ export default function reduxReducer(state = initialState, action) {
 	case 'GET_POSTS': {
 		return {
 			...state,
+			posts: action.posts ? action.posts : state.posts
 		};
 	}				
 	case 'ADD_POST': {
