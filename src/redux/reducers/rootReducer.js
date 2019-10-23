@@ -8,21 +8,6 @@ const initialState = {
 	error: '' 
 };
 
-const getSelectedPost = (posts, id) => posts.find(post => post.id === id)
-const deleteSelectedPost = (posts, id) => posts.filter(post => post.id !== id)
-const editSelectedPost = (posts, id, data) => {
-	return posts.map(post => {
-		if(post.id === id) {
-			post.title = data.title
-			post.description = data.description
-			post.image = data.image ? data.image : post.image
-		}
-		return post
-	})
-}
-const addNewPost = data => Object.assign({ id: + new Date()}, data)
-
-
 export default function reduxReducer(state = initialState, action) {
 	console.log(action)
 	switch (action.type) {
@@ -34,26 +19,26 @@ export default function reduxReducer(state = initialState, action) {
 	case 'ADD_POST': {
 		return {
 			...state,
-			posts: [...state.posts, addNewPost(action.payload.data)]
+			posts: action.posts
 		};
 	}
 	case 'UPDATE_USER_ACTION_POST': {
 		return {
 			...state,
 			userAction: action.payload.userAction,
-			selectedPost: getSelectedPost(state.posts, action.payload.id)
+			selectedPost: action.selectedPost
 		};
 	}
 	case 'DELETE_POST': {
 		return {
 			...state,
-			posts: deleteSelectedPost(state.posts, action.payload.id)
+			posts: action.posts
 		};
 	}
 	case 'EDIT_POST': {
 		return {
 			...state,
-			posts: editSelectedPost(state.posts, action.payload.id, action.payload.data)
+			posts: action.posts
 		};
 	}
 
