@@ -14,7 +14,7 @@ const Homepage = (props) => {
 	const [posts, setPosts] = useState([])
 	const [showModal, setShowModal] = useState(false)
 	const [userAction, setUserAction] = useState('')
-	const [sortDirection, setSortDirection] = useState('descending')
+	const [sortDirection, setSortDirection] = useState('ascending')
 
 	useEffect(() => { props.GET_POSTS() }, [])
 
@@ -48,7 +48,7 @@ const Homepage = (props) => {
 	}
 
 	const handleSort = () => {
-		const newDirection = sortDirection === 'descending' ? 'descending' : 'ascending'
+		const newDirection = sortDirection === 'descending' ? 'ascending' : 'descending'
 		props.SORT_POSTS(newDirection)
 		setSortDirection(newDirection)
 	}
@@ -58,18 +58,18 @@ const Homepage = (props) => {
 	return (
 		<Wrapper>
 			<div>
-			<button style={{ float: 'right' }} onClick={()=> handleSort()}>Sort<Icon style={{ transform: 'rotate(90deg)' }}>arrow_right</Icon></button>
+				<button style={{ float: 'right' }} onClick={()=> handleSort()}>Sort<Icon style={{ transform: 'rotate(90deg)' }}>arrow_right</Icon></button>
 			</div>
 			
 			<PostModal showModal={showModal} handleOnClose={() => handleShowModal(false)} handleOnSubmit={(data)=> handleOnSubmit(data)} userAction={userAction} selectedPost={props.selectedPost}/>
 
 			<PostsGrid posts={posts}/>
 
-			<ButtonWrapper>
+			<AddButtonWrapper>
 				<Fab color="secondary" aria-label="add" onClick={() => props.UPDATE_USER_ACTION_POST('add', '')}>
 					<AddIcon />
 				</Fab>
-			</ButtonWrapper>
+			</AddButtonWrapper>
 
 		</Wrapper>
 	)
@@ -96,7 +96,7 @@ const Wrapper = styled.div`
 	height: 100%;
 `
 
-const ButtonWrapper = styled.div`
+const AddButtonWrapper = styled.div`
 	display: flex;
 	align-self: flex-end;
 	flex-direction: row-reverse;

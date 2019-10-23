@@ -1,9 +1,9 @@
 const initialState = { 
 	userAction: '', 
 	posts: [
-		{id: '1', title: 'GOLF', description: 'kjhaslkdjhflkasjdhflkhjaslkdfhaskldjhfkajshdfklhasdlkfhkalsdhjfkjahsdfkhasdklfjh', url: 'https://www.mallorcadiario.com/fotos/1/408551_golf_thumb_708.jpg'},
-		{id: '2', title: 'GOLF', description: 'kjhaslkdjhflkasjdhflkhjaslkdfhaskldjhfkajshdfklhasdlkfhkalsdhjfkjahsdfkhasdklfjh', url: 'https://www.mallorcadiario.com/fotos/1/408551_golf_thumb_708.jpg'},
-		{id: '3', title: 'GOLF', description: 'kjhaslkdjhflkasjdhflkhjaslkdfhaskldjhfkajshdfklhasdlkfhkalsdhjfkjahsdfkhasdklfjh', url: 'https://www.mallorcadiario.com/fotos/1/408551_golf_thumb_708.jpg'}
+		{id: 1, title: '1GOLF', description: 'kjhaslkdjhflkasjdhflkhjaslkdfhaskldjhfkajshdfklhasdlkfhkalsdhjfkjahsdfkhasdklfjh', url: 'https://www.mallorcadiario.com/fotos/1/408551_golf_thumb_708.jpg'},
+		{id: 2, title: '2GOLF', description: 'kjhaslkdjhflkasjdhflkhjaslkdfhaskldjhfkajshdfklhasdlkfhkalsdhjfkjahsdfkhasdklfjh', url: 'https://www.mallorcadiario.com/fotos/1/408551_golf_thumb_708.jpg'},
+		{id: 3, title: '3GOLF', description: 'kjhaslkdjhflkasjdhflkhjaslkdfhaskldjhfkajshdfklhasdlkfhkalsdhjfkjahsdfkhasdklfjh', url: 'https://www.mallorcadiario.com/fotos/1/408551_golf_thumb_708.jpg'}
 	],   
 	error: '' 
 };
